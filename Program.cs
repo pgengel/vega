@@ -12,7 +12,8 @@ namespace WebApplicationBasic
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseKestrel()
+                .UseKestrel() //This is for internal network use, not secure but cross platform
+                //.WebListner() // This is for publicuse - Windows only but secure
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
