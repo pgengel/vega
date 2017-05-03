@@ -61,7 +61,8 @@ Building APIs Using ASP.NET Core
 
         in Startup.cs
             using Microsoft.EntityFrameworkCore;
-            services.AddDbContext<VegaDbContext>(options => options.UseSqlServer(""));
+            services.AddDbContext<VegaDbContext>(options => options.UseSqlServer("connection string"));
 
-
+        creaing a DB
+                
 
