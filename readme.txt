@@ -63,6 +63,17 @@ Building APIs Using ASP.NET Core
             using Microsoft.EntityFrameworkCore;
             services.AddDbContext<VegaDbContext>(options => options.UseSqlServer("connection string"));
 
-        creaing a DB
-                
+        Creating a DB
+            dotnet add package Microsoft.EntityFrameworkCore.Design
+            dotnet ef migrations add InitialModel
+            
+            There will be nothing in the migrations file because there is nothing in the db context.
+            Thus, in VegaDbContext add public DbSet<Make> Makes {get;set}
+            The make class knows about the model class because it is like a foreign key, thus we do not need to list this as well in the db context class.
+
+            to remove the last migrations
+            dotnet ef migrations remove
+        
+            Make API
+    
 
