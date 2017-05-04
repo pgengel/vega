@@ -1,3 +1,4 @@
+import { MakeService } from './services/make.service';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
@@ -22,11 +23,15 @@ import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.com
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'vehicles/new', component: VehicleFormComponent },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ])
+    ],
+    providers: [
+        MakeService
     ]
 })
 export class AppModule {
