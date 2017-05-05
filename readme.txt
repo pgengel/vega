@@ -75,5 +75,17 @@ Building APIs Using ASP.NET Core
             dotnet ef migrations remove
         
             Make API
+
+
+Building forms with angular and bootstrap
+    creating components easliy
+    npm install @angular/cli@latest -g
+
+    ng new hello-world then move the .angular-cli-json to the root vega.
+    npm install @angular/cli@latest --save-dev
+    go to the component folder cd ClientApp and ng g component vehicle-form
+
+    form>div.form-group>label+select
+
     
 
