@@ -66,6 +66,7 @@ Building APIs Using ASP.NET Core
         Creating a DB
             dotnet add package Microsoft.EntityFrameworkCore.Design
             dotnet ef migrations add InitialModel
+            dotnet ef database update
             
             There will be nothing in the migrations file because there is nothing in the db context.
             Thus, in VegaDbContext add public DbSet<Make> Makes {get;set}

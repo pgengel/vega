@@ -8,7 +8,7 @@ using vega.Persistence;
 namespace Vega.Migrations
 {
     [DbContext(typeof(VegaDbContext))]
-    [Migration("20170503193001_InitialModel")]
+    [Migration("20170506211632_InitialModel")]
     partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,11 +22,13 @@ namespace Vega.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Makes");
+                    b.ToTable("tb_CarMake");
                 });
 
             modelBuilder.Entity("vega.Models.Model", b =>
@@ -36,13 +38,15 @@ namespace Vega.Migrations
 
                     b.Property<int>("MakeId");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 
                     b.HasIndex("MakeId");
 
-                    b.ToTable("Model");
+                    b.ToTable("tb_CarModel");
                 });
 
             modelBuilder.Entity("vega.Models.Model", b =>
