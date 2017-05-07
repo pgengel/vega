@@ -27,5 +27,6 @@ namespace vega.Controllers
 
             return mapper.Map<List<Make>, List<MakeResource>>(makes);
         }
+
     }
 }
