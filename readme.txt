@@ -74,8 +74,13 @@ Building APIs Using ASP.NET Core
 
             to remove the last migrations
             dotnet ef migrations remove
-        
+
+            Self referencing errors - need to seperate the models from the db and the models from the API.
+                use automapper - dotnet add package automapper and dotnet add package automapper.extensions.microsoft.dependencyinjection --version 1.2.0 
+                Then in the startup.cs - services.AddAutoMapper(); 
             Make API
+                install Postman
+                and JSONView - google ext
 
 
 Building forms with angular and bootstrap
