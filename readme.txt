@@ -93,5 +93,25 @@ Building forms with angular and bootstrap
 
     form>div.form-group>label+select
 
+
+Implementing CRUD Operations
+Domain Models 
+ Make->Model 
+ 1    n
+
+ Feature<-Vehicle This is a many-to-many relationship, we need to add a mapping class VehicleFeature
+ n       n   
+
+ Feature<-VehicleFeature->Vehicle
+ 1          n       n       1  going to use a composite primary key.
+
+ Vehicle->Model
+ n          1
+
+ in Vehicle model add property VehicleFeature and init it in ctor
+ public ICollection<VehicleFeatures> Features
+ ctor
+    Features = new Collection<VehicleFeature>
+Then in DBContext you need to override a method.
     
 
