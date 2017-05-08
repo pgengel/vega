@@ -113,5 +113,12 @@ Domain Models
  ctor
     Features = new Collection<VehicleFeature>
 Then in DBContext you need to override a method.
+
+When using complex object we need to tell .net that where to init this object that it is reeiving
+
+        public IActionResult CreateVehicle([FromBody] Vehicle vehicle) - use from FromBody
+it means that the data of the request is not the model in the models class but in the body of the request.
+
+    
     
 
