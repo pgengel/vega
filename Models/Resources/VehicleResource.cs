@@ -7,7 +7,7 @@ namespace vega.Models.Resources
 
     public class VehicleResource
     {
-
+ 
         public int Id { get; set; }
         public int ModelId { get; set; }
         public bool isRegistered { get; set; }
