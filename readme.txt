@@ -119,6 +119,9 @@ When using complex object we need to tell .net that where to init this object th
         public IActionResult CreateVehicle([FromBody] Vehicle vehicle) - use from FromBody
 it means that the data of the request is not the model in the models class but in the body of the request.
 
+Repository
+    it is a collection of objects in memory, thus put Add, Remove, Update, Read methods. Do not add SaveChanges
+
     
     
 
