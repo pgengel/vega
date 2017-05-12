@@ -126,7 +126,8 @@ Repository
 
 Cannot use [(ngModel)]="vehicle.features" because check boxes have dynimick field. - > (change)="onFeatureToggle(f.id, $event
 to submit a form you need to supply a ng submit form directiveto <form (ngSubmit)="submit()">
-
+There is a control object in angular that tracks what html components have been touched, dirty changed etc
+on the form you use ngForm, and on the  input you use ngModel
     
     
 
