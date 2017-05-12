@@ -122,6 +122,11 @@ it means that the data of the request is not the model in the models class but i
 Repository
     it is a collection of objects in memory, thus put Add, Remove, Update, Read methods. Do not add SaveChanges
 
+
+
+Cannot use [(ngModel)]="vehicle.features" because check boxes have dynimick field. - > (change)="onFeatureToggle(f.id, $event
+to submit a form you need to supply a ng submit form directiveto <form (ngSubmit)="submit()">
+
     
     
 
