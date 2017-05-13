@@ -4,7 +4,7 @@
   {{ vehicle | json }}
 </p>
 
-<form (ngSubmit)="submit()" #f="ngForm">
+<form (ngSubmit)="submit()" #f="ngForm" novalidate>
   <div class="form-group">
     <label for="make">Make</label>
     <select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="vehicle.makeId" name="makeId" required #make="ngModel"> 

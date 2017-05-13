@@ -128,6 +128,12 @@ Cannot use [(ngModel)]="vehicle.features" because check boxes have dynimick fiel
 to submit a form you need to supply a ng submit form directiveto <form (ngSubmit)="submit()">
 There is a control object in angular that tracks what html components have been touched, dirty changed etc
 on the form you use ngForm, and on the  input you use ngModel
+
+toast notifiction - 
+    npm install ng2-toasty
+
+    add                 'ng2-toasty',
+                'ng2-toasty/bundles/style-bootstrap.css', in webpack.config.vendor.js and run webpack --config webpack.config.vendor.js 
     
     
 

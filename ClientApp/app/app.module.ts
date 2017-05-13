@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
 
+import { ToastyModule} from 'ng2-toasty';
+
 import { VehicleService } from './services/vehicle.service';
 
 import { AppComponent } from './components/app/app.component'
@@ -25,6 +27,7 @@ import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.com
     ],
     imports: [
         FormsModule,
+        ToastyModule.forRoot(),
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
