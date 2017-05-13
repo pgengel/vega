@@ -14,7 +14,7 @@ Getting Started
 Setting up the project:
     1. yo aspnetcore-spa
     2. dotnet run - build the app and run it on localhost:5000/home
-    3. set ASPNETCORE_ENVIRONMENT="Development"
+    3. set ASPNETCORE_ENVIRONMENT="Development" / export ASPNETCORE_ENVIRONMENT=Development export ASPNETCORE_ENVIRONMENT=Production
     4. Adding a watch: https://github.com/aspnet/DotNetTools/tree/dev/src/Microsoft.DotNet.Watcher.Tools
         dotnet watch run
     5. dotnet restore
@@ -137,3 +137,4 @@ toast notifiction -
     
     
 
+Logging errros in the cloud - sentry.io
