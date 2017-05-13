@@ -25,7 +25,7 @@ export class VehicleFormComponent implements OnInit {
     contact: {
       name: '',
       phone: '',
-      email: ''
+      email: '',
     }
   };
 
@@ -45,8 +45,12 @@ export class VehicleFormComponent implements OnInit {
       sources.push(this.vehicleService.getVehicle(this.vehicle.id))
     
     Observable.forkJoin(sources).subscribe(data => {
+      this.makes = data[0];
+      this.features = data[1];
+
       if(this.vehicle.id)
         this.setVehicle(data[2]);
+        this.populateModels();
     }, err => {
       if(err.status == 404)
         this.router.navigate(['/home']);
@@ -54,20 +58,24 @@ export class VehicleFormComponent implements OnInit {
   }
 
   private setVehicle(v: Vehicle){
-      this.vehicle.id = v.id,
-      this.vehicle.makeId = v.make.id,
-      this.vehicle.modelId = v.model.id,
-      this.vehicle.isRegistered = v.isRegistered,
-      this.vehicle.contact = v.contact,
+      this.vehicle.id = v.id;
+      this.vehicle.makeId = v.make.id;
+      this.vehicle.modelId = v.model.id;
+      this.vehicle.isRegistered = v.isRegistered;
+      this.vehicle.contact = v.contact;
       this.vehicle.features = _.pluck(v.features, 'id');
 
         
   }
 
   onMakeChange(){
+    this.populateModels();
+    delete this.vehicle.modelId;
+  }
+
+  private populateModels(){
     var selectedMake = this.makes.find(m => m.id == this.vehicle.makeId);
     this.models = selectedMake ? selectedMake.models : [];
-    delete this.vehicle.modelId;
   }
 
   onFeatureToggle(featureId, $event){
