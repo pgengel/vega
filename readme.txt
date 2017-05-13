@@ -138,3 +138,6 @@ toast notifiction -
     
 
 Logging errros in the cloud - sentry.io
+install underscore to do mappings in angular 2
+    npm install underscore
+    npm install @types/underscore
