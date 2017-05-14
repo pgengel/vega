@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class VehicleService {
-
+  private readonly vehicleEndPoint = '/api/vehicle/';
   constructor(private http: Http) { }
 
   getMakes(){
@@ -19,27 +19,38 @@ export class VehicleService {
   }
 
   create(vehicle){
-    return this.http.post("/api/vehicle", vehicle)
+    return this.http.post(this.vehicleEndPoint, vehicle)
       .map(res => res.json());
   }
 
   getVehicle(id){
-    return this.http.get("/api/vehicle/" + id)
+    return this.http.get(this.vehicleEndPoint + id)
       .map(res => res.json());
   }
 
-  getVehicles(){
-    return this.http.get("/api/vehicle")
+  getVehicles(filter){
+    return this.http.get(this.vehicleEndPoint + '?' + this.toQueryString(filter))
       .map(res => res.json());
+  }
+
+  toQueryString(obj) {
+    var parts = [];
+    for (var property in obj) {
+      var value = obj[property];
+      if (value != null && value != undefined) 
+        parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+    }
+
+    return parts.join('&');
   }
 
   updateVehicle(vehicle: SaveVehicle){
-    return this.http.put('/api/vehicle/' + vehicle.id, vehicle)
+    return this.http.put(this.vehicleEndPoint + vehicle.id, vehicle)
       .map(res => res.json());
   }
 
   deleteVehicle(id){
-    return this.http.delete('/api/vehicle' + id)
+    return this.http.delete(this.vehicleEndPoint + id)
       .map(res => res.json());
   }
 
