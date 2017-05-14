@@ -6,6 +6,6 @@ namespace vega.Models
         public int? ModelId {get; set; }
 
         public string SortBy { get; set;}
-        public string IsSortAscending { get; set;}
+        public bool IsSortAscending { get; set;}
     }
 }
