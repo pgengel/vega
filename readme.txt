@@ -141,3 +141,4 @@ Logging errros in the cloud - sentry.io
 install underscore to do mappings in angular 2
     npm install underscore
     npm install @types/underscore
+    npm install font-awesome --save         remember to add all of this to the web[ack.config.vendor.js!!!]
