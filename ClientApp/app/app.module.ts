@@ -1,3 +1,4 @@
+import { PaginationComponent } from './components/shared/pagination.component';
 import { VehicleListComponent } from './components/vehicle-form/vehicle-list.component';
 import * as Raven from 'raven-js';  
 import { FormsModule } from '@angular/forms'
@@ -32,6 +33,7 @@ Raven
         HomeComponent,
         VehicleFormComponent,
         VehicleListComponent,
+        PaginationComponent,
     ],
     imports: [
         FormsModule,
