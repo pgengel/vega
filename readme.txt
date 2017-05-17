@@ -15,7 +15,7 @@ Setting up the project:
     1. yo aspnetcore-spa
     2. dotnet run - build the app and run it on localhost:5000/home
     3. set ASPNETCORE_ENVIRONMENT="Development" / export ASPNETCORE_ENVIRONMENT=Development export ASPNETCORE_ENVIRONMENT=Production
-    4. Adding a watch: https://github.com/aspnet/DotNetTools/tree/dev/src/Microsoft.DotNet.Watcher.Tools
+    4. Adding a watch: https://github.com/aspnet/DotNetTools/tree/dev/src/Microsoft.DotNet.Watcher.Tools. add the line to the csproj file.
         dotnet watch run
     5. dotnet restore
 
@@ -65,6 +65,7 @@ Building APIs Using ASP.NET Core
 
         Creating a DB
             dotnet add package Microsoft.EntityFrameworkCore.Design
+			Make dbcontext and add dbset models.
             dotnet ef migrations add InitialModel
             dotnet ef database update
             
@@ -78,10 +79,35 @@ Building APIs Using ASP.NET Core
             Self referencing errors - need to seperate the models from the db and the models from the API.
                 use automapper - dotnet add package automapper and dotnet add package automapper.extensions.microsoft.dependencyinjection --version 1.2.0 
                 Then in the startup.cs - services.AddAutoMapper(); 
+				Also, n the controller, include the IMapper in the ctor.
             Make API
                 install Postman
                 and JSONView - google ext
+				add [Route("/api/customer")] MakeCOntrollers(VidlyDbContext context, IMapper mapper) : Controller
+			Installing automapper	
+				dotnet add package AutoMapper and dotnet add package automapper.extensions.microsoft.dependencyinjection --version 1.2.0
+				in controller file add apimodels file and add models. If their are any ICollection init it with         public ICollection<Model> Models { get; set; }
+				public async Task<IEnumerable<CustomerDbModel>> GetCustomers() cast Customer na IEnumerable
+				In MappingProfile : Profile CreateMap<CustomerDbModel, CustomerApiModel>();
+        public Make()
+        {
+            Models = new Collection<Model>();
+        }
 
+        [HttpGet]
+        public async Task<IEnumerable<CustomerDbModel>> GetCustomers()
+		
+		Remember their has to data in the database.
+		
+		        [HttpGet]
+        public async Task<ActionResult> GetCustomers()
+        {
+            var customersDb = await this.context.Customer.ToListAsync();
+            if(customersDb == null)
+                return NotFound();
+            var customersApi = mapper.Map<List<CustomerDbModel>, List<CustomerApiModel>>(customersDb);
+            return Ok(customersApi);
+        }
 
 Building forms with angular and bootstrap
     creating components easliy
@@ -130,7 +156,7 @@ There is a control object in angular that tracks what html components have been 
 on the form you use ngForm, and on the  input you use ngModel
 
 toast notifiction - 
-    npm install ng2-toasty
+    npm install ng2-toasty --save
 
     add                 'ng2-toasty',
                 'ng2-toasty/bundles/style-bootstrap.css', in webpack.config.vendor.js and run webpack --config webpack.config.vendor.js 
@@ -139,6 +165,6 @@ toast notifiction -
 
 Logging errros in the cloud - sentry.io
 install underscore to do mappings in angular 2
-    npm install underscore
-    npm install @types/underscore
+    npm install underscore --save
+    npm install @types/underscore --save
     npm install font-awesome --save         remember to add all of this to the web[ack.config.vendor.js!!!]
