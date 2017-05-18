@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,9 @@ namespace vega.Controllers
     [Route("/api/vehicle/{vehicleId}/photos")]
     public class PhotosController : Controller
     {
+        //Put the const in app setting
+        private readonly int MAX_FILE_SIZE = 10 * 1024 * 1024;
+        private readonly string[] APPEPTED_FILE_TYPES = new[] {".png", ".jpg", ".jpeg"};
         private readonly IHostingEnvironment host;
         private readonly IVehicleRepository vehicleRepository;
         private readonly IUnitOfWork unitOfWork;
@@ -32,6 +36,14 @@ namespace vega.Controllers
             var vehicle = await vehicleRepository.GetVehicle(vehicleId, includeRelated: false);
             if (vehicle == null)
                 return NotFound();
+            if(file == null)
+                return BadRequest("Null file");
+            if(file.Length == 0)
+                return BadRequest("Empty file");
+            if(file.Length >= MAX_FILE_SIZE)
+                return BadRequest("File is to large");
+            if(APPEPTED_FILE_TYPES.Any(s => s == Path.GetExtension(file.FileName)))
+                return BadRequest("Invalid file type");
 
             // store the file first in the www root folder wwwroot/upload/image.png
             //To get the path of the folder you need IHostingEnvironment
