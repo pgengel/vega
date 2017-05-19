@@ -12,6 +12,7 @@
     "@angular/platform-server": "^2.4.5",
     "@angular/router": "^3.4.5",
     "@types/node": "^6.0.42",
+    "angular-datatables": "^4.1.0",
     "angular2-platform-node": "~2.0.11",
     "angular2-template-loader": "^0.6.2",
     "angular2-universal": "^2.1.0-rc.1",
@@ -23,6 +24,8 @@
     "bootstrap": "^3.3.7",
     "css": "^2.2.1",
     "css-loader": "^0.25.0",
+    "datatables.net": "^1.10.15",
+    "datatables.net-dt": "^1.10.15",
     "es6-shim": "^0.35.1",
     "event-source-polyfill": "^0.0.7",
     "expose-loader": "^0.7.1",
@@ -31,12 +34,13 @@
     "font-awesome": "^4.7.0",
     "html-loader": "^0.4.4",
     "isomorphic-fetch": "^2.2.1",
-    "jquery": "^2.2.1",
+    "jquery": "^2.2.4",
     "json-loader": "^0.5.4",
+    "ng2-toasty": "^4.0.0",
     "preboot": "^4.5.2",
     "raven-js": "^3.15.0",
     "raw-loader": "^0.5.1",
-    "rxjs": "^5.3.0",
+    "rxjs": "5.4.0",
     "style-loader": "^0.13.1",
     "to-string-loader": "^1.1.5",
     "typescript": "^2.2.1",
@@ -44,9 +48,11 @@
     "webpack": "^2.2.0",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1",
-    "zone.js": "^0.7.8"
+    "zone.js": "0.8.10"
   },
   "devDependencies": {
-    "@angular/cli": "^1.0.2"
+    "@angular/cli": "^1.0.2",
+    "@types/datatables.net": "^1.10.1",
+    "@types/jquery": "^2.0.45"
   }
 }
