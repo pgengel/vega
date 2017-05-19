@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using vega.Models;
 using vega.Models.Resources;
 using vega.Persistence;
@@ -17,13 +18,15 @@ namespace vega.Controllers
     public class PhotosController : Controller
     {
         //Put the const in app setting
-        private readonly int MAX_FILE_SIZE = 10 * 1024 * 1024;
-        private readonly string[] APPEPTED_FILE_TYPES = new[] {".png", ".jpg", ".jpeg"};
+        //private readonly int MAX_FILE_SIZE = 10 * 1024 * 1024;
+        //private readonly string[] APPEPTED_FILE_TYPES = new[] {".png", ".jpg", ".jpeg"};
         private readonly IHostingEnvironment host;
         private readonly IVehicleRepository vehicleRepository;
         private readonly IUnitOfWork unitOfWork;
-        public PhotosController(IHostingEnvironment host, IMapper mapper, IVehicleRepository vehicleRepository, IUnitOfWork unitOfWork)
+        private readonly PhotoSettings photoSettings;
+        public PhotosController(IOptionsSnapshot<PhotoSettings> options, IHostingEnvironment host, IMapper mapper, IVehicleRepository vehicleRepository, IUnitOfWork unitOfWork)
         {
+            this.photoSettings = options.Value;
             this.unitOfWork = unitOfWork;
             this.vehicleRepository = vehicleRepository;
             this.host = host;
@@ -40,9 +43,9 @@ namespace vega.Controllers
                 return BadRequest("Null file");
             if(file.Length == 0)
                 return BadRequest("Empty file");
-            if(file.Length >= MAX_FILE_SIZE)
+            if(file.Length >= photoSettings.MaxBytes)
                 return BadRequest("File is to large");
-            if(APPEPTED_FILE_TYPES.Any(s => s == Path.GetExtension(file.FileName)))
+            if(!photoSettings.isFileSupported(file.Name));
                 return BadRequest("Invalid file type");
 
             // store the file first in the www root folder wwwroot/upload/image.png
