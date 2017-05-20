@@ -1,25 +1,27 @@
-import * as Raven  from 'raven-js';
+import * as Raven from 'raven-js'; 
 import { ToastyService } from 'ng2-toasty';
-import {NgZone, ErrorHandler,  Inject, isDevMode} from '@angular/core';
-export class AppErrorHandler implements ErrorHandler{
-    
-    constructor(@Inject(ToastyService) private toastyService: ToastyService, private NgZone: NgZone){
+import { ErrorHandler, Inject, NgZone, isDevMode } from '@angular/core';
 
-    }
-    handleError(error: any): void {
-        if(!isDevMode)
-            Raven.captureException(error.originalError || error);
-        else
-            throw error;
-            
-        this.NgZone.run(()=>{
-            this.toastyService.error({
-                title: 'Error',
-                msg: 'Unexpected error happened.',
-                theme: 'bootstrap',
-                showClose: true,
-                timeout: 5000
-            });
-        });
-    }
+export class AppErrorHandler implements ErrorHandler {
+  constructor(
+    private ngZone: NgZone,
+    @Inject(ToastyService) private toastyService: ToastyService) {
+  }
+
+  handleError(error: any): void {
+    this.ngZone.run(() => {
+      this.toastyService.error({
+        title: 'Error',
+        msg: 'An unexpected error happened.',
+        theme: 'bootstrap',
+        showClose: true,
+        timeout: 5000
+      });
+    });
+
+    if (!isDevMode())
+      Raven.captureException(error.originalError || error);
+    else 
+      throw error;
+  }
 }

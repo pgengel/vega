@@ -58,8 +58,8 @@ namespace vega.Controllers
                 return BadRequest("Empty file");
             if (file.Length >= photoSettings.MaxBytes)
                 return BadRequest("File is to large");
-            if (!photoSettings.isFileSupported(file.Name)) ;
-            return BadRequest("Invalid file type");
+            if (photoSettings.isFileSupported(file.Name)) 
+                return BadRequest("Invalid file type");
 
             // store the file first in the www root folder wwwroot/upload/image.png
             //To get the path of the folder you need IHostingEnvironment
