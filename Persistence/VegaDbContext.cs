@@ -9,6 +9,7 @@ namespace vega.Persistence
         public DbSet<Feature> Features { get; set; }
         public DbSet<Vehicle> Vehicle { get; set; }
         public DbSet<Model> Model { get; set; }
+        public DbSet<Photo> Photos { get; set; }
         public VegaDbContext(DbContextOptions<VegaDbContext> options): base(options)
         {
             

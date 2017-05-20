@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,13 +25,25 @@ namespace vega.Controllers
         private readonly IVehicleRepository vehicleRepository;
         private readonly IUnitOfWork unitOfWork;
         private readonly PhotoSettings photoSettings;
-        public PhotosController(IOptionsSnapshot<PhotoSettings> options, IHostingEnvironment host, IMapper mapper, IVehicleRepository vehicleRepository, IUnitOfWork unitOfWork)
+        private readonly IPhotoRepository photoRepository;
+        private readonly IMapper mapper;
+        public PhotosController(IPhotoRepository photoRepository, IOptionsSnapshot<PhotoSettings> options, IHostingEnvironment host, IMapper mapper, IVehicleRepository vehicleRepository, IUnitOfWork unitOfWork)
         {
+            this.mapper = mapper;
+            this.photoRepository = photoRepository;
             this.photoSettings = options.Value;
             this.unitOfWork = unitOfWork;
             this.vehicleRepository = vehicleRepository;
             this.host = host;
 
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<PhotoResource>> GetPhotos(int vehicleId)
+        {
+            var photos = await photoRepository.GetPhotos(vehicleId);
+
+            return mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
         }
 
         [HttpPost]
@@ -39,14 +52,14 @@ namespace vega.Controllers
             var vehicle = await vehicleRepository.GetVehicle(vehicleId, includeRelated: false);
             if (vehicle == null)
                 return NotFound();
-            if(file == null)
+            if (file == null)
                 return BadRequest("Null file");
-            if(file.Length == 0)
+            if (file.Length == 0)
                 return BadRequest("Empty file");
-            if(file.Length >= photoSettings.MaxBytes)
+            if (file.Length >= photoSettings.MaxBytes)
                 return BadRequest("File is to large");
-            if(!photoSettings.isFileSupported(file.Name));
-                return BadRequest("Invalid file type");
+            if (!photoSettings.isFileSupported(file.Name)) ;
+            return BadRequest("Invalid file type");
 
             // store the file first in the www root folder wwwroot/upload/image.png
             //To get the path of the folder you need IHostingEnvironment
