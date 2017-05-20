@@ -1,3 +1,5 @@
+import { BrowserXhrWithProgress, ProgressService } from './services/progress.service';
+import { BrowserXhr } from '@angular/http';
 import { PhotoService } from './services/photo.service';
 import { PaginationComponent } from './components/shared/pagination.component';
 import { VehicleListComponent } from './components/vehicle-form/vehicle-list.component';
@@ -55,8 +57,8 @@ Raven
         ])
     ],
     providers: [
-        { provide: ErrorHandler, useClass: AppErrorHandler },
-        VehicleService, PhotoService,
+        { provide: ErrorHandler, useClass: AppErrorHandler },  { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
+        VehicleService, PhotoService, ProgressService,
     ]
 })
 export class AppModule {
