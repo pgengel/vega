@@ -42,7 +42,7 @@ export class VehicleViewComponent implements OnInit {
         v => this.vehicle = v,
         err => {
           if (err.status == 404) {
-            this.router.navigate(['/vehicle']);
+            this.router.navigate(['/vehicles']);
             return; 
           }
         });
