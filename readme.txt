@@ -168,3 +168,6 @@ install underscore to do mappings in angular 2
     npm install underscore --save
     npm install @types/underscore --save
     npm install font-awesome --save         remember to add all of this to the web[ack.config.vendor.js!!!]
+
+Authentication
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer

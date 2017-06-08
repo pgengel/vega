@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using vega.Models;
@@ -24,6 +25,7 @@ namespace vega.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateVehicle([FromBody] SaveVehicleResource vehicleResource)
         {
             //throw new Exception();
@@ -58,6 +60,7 @@ namespace vega.Controllers
         }
 
         [HttpPut("{id}")] // /api/vehicle/{id}, id must be listed in UpdateVehicle(int id, ...)- must have the same name
+        [Authorize]
         public async Task<IActionResult> UpdateVehicle(int id, [FromBody] SaveVehicleResource vehicleResource)
         {
             // input validations
@@ -77,6 +80,7 @@ namespace vega.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteVehicle(int id)
         {
             var vehicle = await repository.GetVehicle(id, includeRelated: false);
