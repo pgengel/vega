@@ -13,7 +13,7 @@ export class AuthService {
     responseType: 'token id_token',
     audience: `https://pgengel.auth0.com/userinfo`,
     redirectUri: AUTH_CONFIG.callbackURL,
-    scope: 'openid profile'
+    scope: 'openid profile read:messages'
   });
 
   userProfile: any;
