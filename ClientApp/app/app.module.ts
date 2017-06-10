@@ -1,3 +1,4 @@
+import { ProfileComponent } from './profile/profile.component';
 import { AuthService } from './auth/auth.service';
 import { BrowserXhrWithProgress, ProgressService } from './services/progress.service';
 import { BrowserXhr } from '@angular/http';
@@ -40,6 +41,7 @@ Raven
         VehicleListComponent,
         PaginationComponent,
         VehicleViewComponent,
+        ProfileComponent,
     ],
     imports: [
         FormsModule,
@@ -49,6 +51,7 @@ Raven
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'vehicle/new', component: VehicleFormComponent },
             { path: 'vehicles/edit/:id', component: VehicleFormComponent },
+            { path: 'profile', component: ProfileComponent },
             { path: 'vehicle/:id', component: VehicleViewComponent },
             { path: 'vehicles', component: VehicleListComponent },
             { path: 'home', component: HomeComponent },

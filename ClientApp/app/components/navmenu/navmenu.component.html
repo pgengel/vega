@@ -12,6 +12,11 @@
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
             <ul class='nav navbar-nav'>
+                 <li [routerLinkActive]="['link-active']">
+                    <a *ngIf="auth.isAuthenticated()" routerLink="/profile"> 
+                        <span class='glyphicon glyphicon-user'></span> Profile
+                    </a>
+                </li>               
                 <li [routerLinkActive]="['link-active']">
                     <a (click)="auth.login()" *ngIf="!auth.isAuthenticated()"> 
                         <span class='glyphicon glyphicon-user'></span> Login

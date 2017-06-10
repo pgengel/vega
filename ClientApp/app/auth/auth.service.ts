@@ -12,9 +12,11 @@ export class AuthService {
     domain: AUTH_CONFIG.domain,
     responseType: 'token id_token',
     audience: `https://pgengel.auth0.com/userinfo`,
-    redirectUri: 'http://localhost:5000/home',
-    scope: 'openid'
+    redirectUri: AUTH_CONFIG.callbackURL,
+    scope: 'openid profile'
   });
+
+  userProfile: any;
 
   constructor(public router: Router) {}
 
@@ -33,6 +35,21 @@ export class AuthService {
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
+    });
+  }
+
+  public getProfile(cb): void {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('Access token must exist to fetch profile');
+    }
+
+    const self = this;
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        self.userProfile = profile;
+      }
+      cb(err, profile);
     });
   }
 
